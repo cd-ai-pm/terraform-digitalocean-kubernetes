@@ -107,3 +107,9 @@ variable "kubeconfig_path" {
   default     = "./kubeconfig"
   description = "The path to save the kubeconfig to"
 }
+
+variable "sso_enabled" {
+  type        = bool
+  default     = false
+  description = "Enable DigitalOcean Kubernetes Single Sign-On (SSO) for the cluster."
+}
