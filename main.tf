@@ -25,6 +25,7 @@ resource "digitalocean_kubernetes_cluster" "main" {
   surge_upgrade        = var.surge_upgrade
   ha                   = var.ha
   registry_integration = var.registry_integration
+  sso_enabled          = var.enable_sso
 
   dynamic "node_pool" {
     for_each = var.critical_node_pool
