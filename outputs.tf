@@ -49,6 +49,10 @@ output "maintenance_policy_day" {
   value       = digitalocean_kubernetes_cluster.main[*].maintenance_policy
   description = "A block representing the cluster's maintenance window. Updates will be applied within this window."
 }
+output "sso_enabled" {
+  value       = digitalocean_kubernetes_cluster.main[*].sso_enabled
+  description = "A boolean value indicating whether DigitalOcean Kubernetes Single Sign-On (SSO) is enabled for the cluster."
+}
 output "local_file" {
   value     = join("", digitalocean_kubernetes_cluster.main[*].kube_config[0].raw_config)
   sensitive = true
