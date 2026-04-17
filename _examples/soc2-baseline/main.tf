@@ -29,6 +29,7 @@ module "cluster" {
   auto_upgrade          = false
   surge_upgrade         = false
   registry_integration  = false
+  sso_enabled           = true
   maintenance_policy = {
     day        = "sunday"
     start_time = "03:00"
