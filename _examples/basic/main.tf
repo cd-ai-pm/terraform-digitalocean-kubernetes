@@ -29,6 +29,10 @@ module "cluster" {
   cluster_version = "1.27.4-do.0"
   vpc_uuid        = module.vpc.id
 
+  # Enable DigitalOcean SSO for cluster authentication
+  # When enabled, users can authenticate using their DO account credentials
+  sso_enabled = true
+
   critical_node_pool = {
     critical_node = {
       node_count = 1
@@ -47,4 +51,3 @@ module "cluster" {
     }
   }
 }
-
