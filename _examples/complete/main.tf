@@ -29,6 +29,10 @@ module "cluster" {
   cluster_version = "1.27.4-do.0"
   vpc_uuid        = module.vpc.id
 
+  # Enable DigitalOcean Kubernetes SSO for centralized authentication
+  # Users can authenticate to the cluster using their DigitalOcean account
+  enable_sso = true
+
   critical_node_pool = {
     critical_node = {
       node_count = 1
@@ -65,4 +69,3 @@ module "cluster" {
     }
   }
 }
-
