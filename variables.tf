@@ -72,6 +72,12 @@ variable "registry_integration" {
   description = "Enables or disables the DigitalOcean container registry integration for the cluster. This requires that a container registry has first been created for the account."
 }
 
+variable "sso_enabled" {
+  type        = bool
+  default     = false
+  description = "Enable or disable DigitalOcean Kubernetes (DOKS) SSO support."
+}
+
 variable "critical_node_pool" {
   type        = any
   default     = {}
