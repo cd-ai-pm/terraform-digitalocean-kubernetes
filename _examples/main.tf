@@ -6,7 +6,7 @@ module "kubernetes" {
   region      = "nyc1"
 
   cluster_version = "1.31.1-do.5"
-  sso_enabled     = true
+  sso_enabled     = true  # Example usage of the new variable
 
   critical_node_pool = {
     name       = "default"
