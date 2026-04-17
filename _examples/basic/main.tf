@@ -28,6 +28,7 @@ module "cluster" {
   region          = local.region
   cluster_version = "1.27.4-do.0"
   vpc_uuid        = module.vpc.id
+  sso_enabled     = true
 
   critical_node_pool = {
     critical_node = {
@@ -47,4 +48,3 @@ module "cluster" {
     }
   }
 }
-
