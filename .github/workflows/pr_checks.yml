@@ -8,10 +8,14 @@ on:
       - synchronize
       - reopened
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   pr-validation:
     if: github.actor != 'dependabot[bot]'
-    uses: clouddrove/github-shared-workflows/.github/workflows/pr-checks.yml@03dcb08c08de8e1798c735f548655e391f924277 # pinned to latest
+    uses: clouddrove/github-shared-workflows/.github/workflows/pr-checks.yml@03dcb08c08de8e1798c735f548655e391f924277
     secrets: inherit
     with:
       subjectPattern: '^.+$'
