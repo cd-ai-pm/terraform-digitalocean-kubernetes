@@ -80,6 +80,21 @@ Here are some examples of how you can use this module in your inventory structur
 
 
 
+## Usage
+
+```hcl
+module "terraform-digitalocean-kubernetes" {
+  source = "git::https://github.com/cd-ai-pm/terraform-digitalocean-kubernetes.git?ref=main"
+
+  # optional inputs (showing first 5 with their defaults)
+  app_node_pools     = {}  # Cluster additional node pools.
+  auto_upgrade       = false  # Enable auto upgrade during maintenance window.
+  cluster_version    = "1.31.1-do.5"  # K8s Cluster Version.
+  critical_node_pool = {}  # Cluster default node pool.
+  enabled            = true  # Whether to create the resources. Set to `false` to prevent the module from creating any resources.
+}
+```
+
 ## Inputs
 
 No input.
@@ -120,3 +135,76 @@ At [CloudDrove][website], we offer expert guidance, implementation support and s
   [twitter]: https://twitter.com/clouddrove/
   [email]: https://clouddrove.com/contact-us.html
   [terraform_modules]: https://github.com/clouddrove?utf8=%E2%9C%93&q=terraform-&type=&language=
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10.0 |
+| <a name="requirement_digitalocean"></a> [digitalocean](#requirement\_digitalocean) | >= 2.70.0 |
+| <a name="requirement_local"></a> [local](#requirement\_local) | ~> 2.3 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_digitalocean"></a> [digitalocean](#provider\_digitalocean) | >= 2.70.0 |
+| <a name="provider_local"></a> [local](#provider\_local) | ~> 2.3 |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_labels"></a> [labels](#module\_labels) | terraform-do-modules/labels/digitalocean | 1.0.6 |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [digitalocean_kubernetes_cluster.main](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/kubernetes_cluster) | resource |
+| [digitalocean_kubernetes_node_pool.main](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/kubernetes_node_pool) | resource |
+| [local_file.kubeconfig](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_app_node_pools"></a> [app\_node\_pools](#input\_app\_node\_pools) | Cluster additional node pools. | `map(any)` | `{}` | no |
+| <a name="input_auto_upgrade"></a> [auto\_upgrade](#input\_auto\_upgrade) | Enable auto upgrade during maintenance window. | `bool` | `false` | no |
+| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | K8s Cluster Version. | `string` | `"1.31.1-do.5"` | no |
+| <a name="input_critical_node_pool"></a> [critical\_node\_pool](#input\_critical\_node\_pool) | Cluster default node pool. | `any` | `{}` | no |
+| <a name="input_enabled"></a> [enabled](#input\_enabled) | Whether to create the resources. Set to `false` to prevent the module from creating any resources. | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | Environment (e.g. `prod`, `dev`, `staging`). | `string` | `""` | no |
+| <a name="input_ha"></a> [ha](#input\_ha) | Enable high availability control plane. | `bool` | `true` | no |
+| <a name="input_kubeconfig_path"></a> [kubeconfig\_path](#input\_kubeconfig\_path) | The path to save the kubeconfig to | `string` | `"./kubeconfig"` | no |
+| <a name="input_label_order"></a> [label\_order](#input\_label\_order) | Label order, e.g. `name`,`application`. | `list(any)` | <pre>[<br/>  "name",<br/>  "environment"<br/>]</pre> | no |
+| <a name="input_maintenance_policy"></a> [maintenance\_policy](#input\_maintenance\_policy) | Define the window updates are to be applied when auto upgrade is set to true. | <pre>object({<br/>    day        = string<br/>    start_time = string<br/>  })</pre> | <pre>{<br/>  "day": "any",<br/>  "start_time": "5:00"<br/>}</pre> | no |
+| <a name="input_managedby"></a> [managedby](#input\_managedby) | ManagedBy, eg 'terraform-do-modules' or 'hello@clouddrove.com' | `string` | `"terraform-do-modules"` | no |
+| <a name="input_name"></a> [name](#input\_name) | Name  (e.g. `app` or `cluster`). | `string` | `""` | no |
+| <a name="input_region"></a> [region](#input\_region) | K8s Cluster Region. | `string` | `"blr1"` | no |
+| <a name="input_registry_integration"></a> [registry\_integration](#input\_registry\_integration) | Enables or disables the DigitalOcean container registry integration for the cluster. This requires that a container registry has first been created for the account. | `bool` | `false` | no |
+| <a name="input_surge_upgrade"></a> [surge\_upgrade](#input\_surge\_upgrade) | Enable surge upgrade during maintenance window. | `bool` | `false` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | List of tags to apply to the cluster. | `list(string)` | `[]` | no |
+| <a name="input_vpc_uuid"></a> [vpc\_uuid](#input\_vpc\_uuid) | The ID of the VPC where the Kubernetes cluster will be located. | `string` | `""` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_auto_upgrade"></a> [auto\_upgrade](#output\_auto\_upgrade) | A boolean value indicating whether the cluster will be automatically upgraded to new patch releases during its maintenance window. |
+| <a name="output_cluster_ca_certificate"></a> [cluster\_ca\_certificate](#output\_cluster\_ca\_certificate) | The certificate authority used to verify the cluster's API server. |
+| <a name="output_cluster_subnet"></a> [cluster\_subnet](#output\_cluster\_subnet) | The range of IP addresses in the overlay network of the Kubernetes cluster. |
+| <a name="output_created_at"></a> [created\_at](#output\_created\_at) | The date and time when the Kubernetes cluster was created. |
+| <a name="output_default_node_pool_id"></a> [default\_node\_pool\_id](#output\_default\_node\_pool\_id) | A unique ID that can be used to identify and reference the node pool. |
+| <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | The base URL of the API server on the Kubernetes master node. |
+| <a name="output_id"></a> [id](#output\_id) | A unique ID that can be used to identify and reference a Kubernetes cluster. |
+| <a name="output_ipv4_address"></a> [ipv4\_address](#output\_ipv4\_address) | The public IPv4 address of the Kubernetes master node. This will not be set if high availability is configured on the cluster (v1.21+) |
+| <a name="output_local_file"></a> [local\_file](#output\_local\_file) | n/a |
+| <a name="output_maintenance_policy_day"></a> [maintenance\_policy\_day](#output\_maintenance\_policy\_day) | A block representing the cluster's maintenance window. Updates will be applied within this window. |
+| <a name="output_service_subnet"></a> [service\_subnet](#output\_service\_subnet) | The range of assignable IP addresses for services running in the Kubernetes cluster. |
+| <a name="output_status"></a> [status](#output\_status) | A string indicating the current status of the cluster. Potential values include running, provisioning, and errored. |
+| <a name="output_token"></a> [token](#output\_token) | The token used to authenticate with the cluster. |
+| <a name="output_updated_at"></a> [updated\_at](#output\_updated\_at) | The date and time when the Kubernetes cluster was last updated. |
+| <a name="output_urn"></a> [urn](#output\_urn) | The uniform resource name (URN) for the Kubernetes cluster. |
+<!-- END_TF_DOCS -->
