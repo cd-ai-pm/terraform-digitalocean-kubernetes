@@ -1,3 +1,8 @@
+## [1.1.7] - 2025-03-01
+
+### 🚀 Features
+- Added `surge_upgrade` variable to enable surge upgrades during maintenance windows (default: `false`).
+
 ## [1.1.6] - 2026-02-25
 
 ### 📚 Documentation
