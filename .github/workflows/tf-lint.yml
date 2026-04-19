@@ -1,0 +1,15 @@
+name: '🧪 tflint'
+
+on:
+  pull_request:
+    branches: [main, master]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  tf-lint:
+    uses: cd-ai-pm/github-shared-workflows/.github/workflows/tf-lint.yml@master
+    secrets:
+      GITHUB: ${{ secrets.GITHUB_TOKEN }}
