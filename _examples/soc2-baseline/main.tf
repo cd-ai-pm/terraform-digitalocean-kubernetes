@@ -24,11 +24,11 @@ module "cluster" {
   # Keep pinned and upgraded through controlled rollout waves.
   cluster_version = "1.31.1-do.5"
 
-  vpc_uuid              = module.vpc.id
-  ha                    = true
-  auto_upgrade          = false
-  surge_upgrade         = false
-  registry_integration  = false
+  vpc_uuid             = module.vpc.id
+  ha                   = true
+  auto_upgrade         = false
+  surge_upgrade        = false
+  registry_integration = false
   maintenance_policy = {
     day        = "sunday"
     start_time = "03:00"
