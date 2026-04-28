@@ -1,0 +1,16 @@
+name: '📖 README drift check'
+
+on:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  readme:
+    uses: cd-ai-pm/github-shared-workflows/.github/workflows/readme.yml@master
+    secrets:
+      TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      SLACK_WEBHOOK_TERRAFORM: ${{ secrets.SLACK_WEBHOOK_TERRAFORM }}
