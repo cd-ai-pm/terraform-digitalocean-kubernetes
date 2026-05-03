@@ -1,0 +1,20 @@
+name: 'Release + CHANGELOG'
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: cd-ai-pm/github-shared-workflows/.github/workflows/release-changelog.yml@master
+    with:
+      branch: main
+      tag_format: 'vX.Y.Z'
+      release_tag: ${{ github.ref_name }}
+      version_type: patch
+      latest_tag: ""
+    secrets:
+      GITHUB: ${{ secrets.GITHUB_TOKEN }}

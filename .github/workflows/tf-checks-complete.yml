@@ -1,0 +1,20 @@
+name: '🌎 Terraform Full Checks (complete example)'
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  tf-checks:
+    uses: cd-ai-pm/github-shared-workflows/.github/workflows/tf-checks.yml@master
+    with:
+      working_directory: ./examples/complete/
+      provider: none
+      terraform_version: ""
+      enable_plan: false
